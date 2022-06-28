@@ -1,0 +1,179 @@
+
+<div *ngIf="modal == true">
+  <div class="container">
+  
+    <div class="card">
+      <div class="d-flex justify-content-end align-items-end">
+        <button class="btn btn-danger" (click)="modal = false">X</button>
+      </div>
+      <div class="mx-auto p-2">
+        <h2>Detalle de OC</h2>
+      </div>
+      <div  class="containter ml-4 p-3 table-responsive table-srtiped">
+        <table class="table table-srtiped " style="border-style: dotted ; box-shadow: 10px;" >
+          <thead class="thead-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Empresa</th>
+              <th scope="col">Ruc </th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Nro OC</th>
+              <th scope="col">Adjunto</th>
+              
+            </tr>
+          </thead>
+          <tbody> 
+            <tr>
+              <th scope="row">1</th>
+              <td>Alircor SA</td>
+              <td>200000020</td>
+           
+              <td>21/05/2022</td>
+              <td>t001-2</td>
+              <td></td>
+            
+            </tr>
+         
+          </tbody>
+        
+        </table>
+      </div>
+  
+      <div  class="containter ml-4 p-3 table-responsive table-srtiped">
+        <table class="table table-srtiped " style="border-style: dotted ; box-shadow: 10px;" >
+          <thead class="thead-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Item</th>
+              <th scope="col">Producto </th>
+              <th scope="col">P. Unitario</th>
+              <th scope="col">Valor </th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">IGV</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr>
+              <th scope="row">1</th>
+              <td>Visitas Domiciliarias</td>
+              <td>Verificacion de riesgo Gold</td>
+           
+              <td>5</td>
+              <td>4237.28</td>
+              <td>5</td>
+              <td>76200</td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Visitas Domiciliarias</td>
+              <td>Test de confiabilidad</td>
+           
+              <td>5</td>
+              <td>4237.28</td>
+              <td>5</td>
+              <td>76200</td>
+              <td>5000</td>
+            </tr>
+         
+          </tbody>
+        </table>
+      </div>
+   
+    </div>
+   
+</div>
+
+
+</div>
+
+
+<div *ngIf="modal == false">
+  <div class="container">
+    <div class="card">
+      <div class="row p-4">
+        <div class="col-md-2">
+          <h4>Estados</h4>
+          <div class="form-check mb-2">
+            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Pedidos Creados
+            <label class="form-check-label" for="radio1"></label>
+          </div>
+          <div class="form-check mb-2">
+            <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Pedidos Transferidos
+            <label class="form-check-label" for="radio2"></label>
+          </div>
+          <div class="form-check mb-2">
+            <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option3">Pedidos Aprobados
+            <label class="form-check-label" for="radio3"></label>
+          </div>
+        </div>
+
+        
+        <div class="d-flex  col-md-8 justify-content-center  align-items-center mb-4"  style="height: 100%">
+        
+
+          <div class="align-items-start" style="width: 100%;">
+            <label class="" for=""> Desde</label>
+            <input type="date" class="form-control ml-3">
+          </div>
+       
+          <div class="align-self-center"style="width: 100%;">
+            <label class="" for=""> Hasta</label>
+            <input type="date" class="form-control ml-3">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <h4>Estados</h4>
+          <button class="btn btn-primary"> Nuevo Pedido</button>
+        </div>
+      </div>
+      <div class="mx-auto p-2">
+        <h2> Pedidos </h2>
+      </div>
+    
+      <div  class="containter ml-4 p-3 table-responsive table-srtiped">
+        <table class="table table-srtiped " style="border-style: dotted ; box-shadow: 10px;" >
+          <thead class="thead-primary">
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Emisión</th>
+              <th scope="col">Entrega </th>
+      
+              <th scope="col">Registro</th>
+              <th scope="col">Observaciones</th>
+              <th scope="col">Total</th>
+              <th scope="col">Solicitante</th>
+              <th scope="col">Ver</th>
+              <th scope="col">Imprimir</th>
+              <th scope="col">Borrar</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Transferir</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of data; let i = index"> 
+            <tr>
+              <th scope="row">{{i +1}}</th>
+              <td>{{item.emision}}</td>
+              <td>{{item.entrega}}</td>
+           
+              <td>{{item.registro}}</td>
+              <td>{{item.observaciones}}</td>
+              <td>{{item.total}}</td>
+              <td>{{item.solicitante}}</td>
+              <td><input style="margin: 0 auto;" type="checkbox" ></td>
+              <td><button class="btn btn-primary btn-sm">imprimir</button></td>
+              <td><button class="btn btn-danger btn-sm" (click)="modal = true">eliminar</button></td>
+              <td><button class="btn btn-info btn-sm" (click)="modal = true">Editar</button></td>
+              <td><button class="btn btn-secondary btn-sm" routerLink = "/page/cart" (click) = "pay(i)" >Pagar</button></td>
+
+            </tr>
+         
+          </tbody>
+        </table>
+      </div>
+    
+    </div>
+  </div>
+</div>
+

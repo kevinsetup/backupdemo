@@ -1,0 +1,153 @@
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="p-4"> Método de pago </h2>
+        <div class="card p-4">
+            <h6>Tarjeta de crédito o débito | Visa, Mastercard y más!</h6>
+            <div class="d flex flex-column">
+                <img src="../../../assets/media/illustrations/tarjetas.png" alt="">
+                <p>
+    
+                    Contamos con el mejor mejor sistema de encriptación, Secure Sockets Layer (SSL) de 256-bit.
+                    
+                   </p>
+                   <p> Aceptamos tarjetas de Crédito (Visa, MasterCard, American Express y Diners Club) y Débito (Visa)</p>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Ingresar nombre del titular</label>
+                        <input type="text" class="form-control" placeholder="Ingrese">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Ingresar Nº Tarjeta</label>
+                        <input type="text" class="form-control" placeholder="Ingrese">
+                    </div>
+                </div>
+                <div class="col-6 p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for=""> Mes de Expiración </label>
+                               <select name="" id="" class="form-control" >
+                                   <option value="" *ngFor="let mounth of mouths" >
+                                       {{mounth}}
+                                    </option>
+                               </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for=""> Año de Expiración </label>
+                                <select name="" id="" class="form-control" >
+                                    <option value="" *ngFor="let year of years" >
+                                        {{year}}
+                                     </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                 
+                   
+                </div>
+                <div class="col-md-6 p-4">
+                    <div class="form-group">
+                        <label for="">CVV</label>
+                        <input type="text" class="form-control" placeholder="CVV">
+                    </div>
+                </div>
+                <div class="col-md-6 p-4">
+                    <div class="form-group">
+                        <label for=""> Número de documento  de documento</label>
+                        <input type="number" class="form-control" placeholder="Ingrese">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end align-items-center  p-4">
+                    <div class="form-group">
+                    
+                        <button class="btn btn-success"> Guardar mis datos</button>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+        <h2 class="p-4"> Tus productos </h2>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-10 p-4">
+                    <div class="row" style="height: 100%;">
+                        <div class="col-md-2">
+    
+                        </div>
+                        <div class="d-flex flex-column col-md-8  " style="height: 100%;">
+                            <div>
+                                <h2>Test de confiablidad</h2>
+                            </div>
+                            <div>
+                                <p>Nuevo</p>    
+                            </div>
+                            <div>
+                                <p>Cantidad : 1</p>    
+                            </div>
+                            <div>
+                                <h4 style="color: red;">S/ 1,339.00</h4>    
+                            </div>
+                            <div class="d-flex justify-content-end p-2" style="gap: 20px;" >
+                              
+                                <div class="mb-2" style="margin-top: 20%;">
+                                    <button class="btn btn-danger btn-sm mr-2"> Eliminar</button>
+        
+                                </div>
+                               
+                                
+                            </div>
+                           
+                        </div>
+                     
+                      
+                    </div>
+                  
+                </div>
+    
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-2">
+        <h2>Resumen de tu pedido</h2>
+        <div class="card p-4">
+       
+         
+            <div class="row" >
+                <div class="col-6">
+                    <p>subtotal(1)</p>
+                </div>
+                <div class="col-6">
+                    <p style="color: red;"> S/ 1,339.00</p>
+                </div>
+               
+              
+
+                <div class="col-6">
+                    <p>Total</p>
+                </div>
+                <div class="col-6">
+                    <p style="color: red;"> S/ 1,339.00</p>
+                </div>
+                <div class="mb-4">
+                    <button class="btn btn-primary">Procesar  Pago</button>
+
+                </div>
+
+            </div>
+          
+          
+           
+        </div>
+
+    </div>
+</div>

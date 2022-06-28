@@ -1,0 +1,393 @@
+<div *ngIf="modal == true">
+    <div class="container">
+  
+        <div class="row mb-4">
+            <div class="d-flex col-md-11">
+                <button class="btn btn-primary me-2"> 1 - Informacion Personal</button>
+                <button class="btn btn-secondary" disabled> 2 - Completar Personal</button>
+            </div>
+            <div class="d-flex col-md-1">
+                <button class="btn btn-danger me-2 btn-lg" (click)="modal = false">x</button>
+             
+            </div>
+          
+          
+        </div>
+        <div class="card">
+            <div class="row mb-4 p-4">
+                <div class="col-md-8">
+                    <h3>
+                        Información personal
+                        </h3>
+
+                </div>
+                <div class="d-flex flex-column  align-items-center col-md-2">
+                    <h3>
+                        Descargar
+                        </h3>
+                        <button class="btn btn-primary"> <i class="fa fa-download" aria-hidden="true"></i> </button>
+
+                </div>
+                <div class="d-flex flex-column align-items-center col-md-2">
+                    <h3>
+                        Subir
+                        </h3>
+                        <button class="btn btn-primary"> <i class="fa fa-cloud-upload" aria-hidden="true"></i> </button>
+                </div>
+
+            </div>
+
+            <div class="row p-4">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">Tipo de documento</label>
+                        <select name="" id="" class="form-control">
+                            <option value="">DNI</option>
+                            <option value="">CEDULA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Documento</label>
+                       <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center col-md-2 mt-6" >
+                    <div class="form-group">
+                        
+                        <button class="btn btn-primary"> Extraer </button>
+                    </div>
+                </div>
+                <div class="col-md-3" >
+                    <div class="form-group">
+                        <label for="">Apellidos y Nombres</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row p-4">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">Nacionalidad: *</label>
+                        <select name="" id="" class="form-control">
+                            <option value="">[Seleccione]</option>
+                            <option value="">CEDULA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">Lugar. Nac. Departamento: *</label>
+                        <select name="" id="" class="form-control">
+                            <option value="">[Seleccione]</option>
+                  
+                        </select>
+                    </div>
+                </div>
+         
+                <div class="col-md-4 mb-4" >
+                    <div class="form-group">
+                        <label for="">Lugar. Nac. Provincia: *</label>
+                        <select name="" id="" class="form-control" disabled>
+                            <option value="">[Seleccione]</option>
+                  
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4" >
+                    <div class="form-group">
+                        <label for=""> Lugar. Nac. Distrito: * </label>
+                        <select name="" id="" class="form-control" disabled>
+                            <option value="">[Seleccione]</option>
+                  
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4" >
+                    <div class="form-group">
+                        <label for="">  Fecha de nacimiento:*  </label>
+                       <input type="date" name="" id="" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" >
+                    <div class="form-group">
+                        <label for="">  Celular *  </label>
+                       <input type="number" name="" id="" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4" >
+                    <div class="form-group">
+                        <label for="">  
+                            Telefono: </label>
+                       <input type="number" name="" id="" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4" >
+                    <div class="form-group">
+                        <label for="">  
+                            Dirección:*  </label>
+                       <input type="text" name="" id="" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" >
+                    <div class="form-group">
+                        <label for="">  
+                            Correo electronico:*  :*  </label>
+                       <input type="email" name="" id="" class="form-control" placeholder="example@atenea.com">
+                    </div>
+                </div>
+                <div class="col-md-4 " >
+                    <div class="form-group">
+                        <label for="">  
+                            Servicio  :*  </label>
+                       <select name="" id="" class="form-control">
+                           <option value="">[ Seleccionar ]</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-start col-md-4 d-block mt-6" >
+                    <div class="form-group">
+                      <button class="btn btn-primary" > +  Agregar</button>
+                    </div>
+                </div>
+                
+            </div>
+           
+            <div class="row mb-4 mt-4 p-4">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>T. Doc.</th>
+                                <th>N°. Doc.</th>
+                                <th>Tel.</th>
+                                <th>Cel .</th>
+                                <th>Departamento </th>
+                                <th>Distrito</th>
+                                <th>Dirección</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                          
+                            </tr>
+                                      
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+        </div>
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="modal == false">
+    <div class="container">
+        <h3>REGISTRO DE SOLICITUDES</h3>
+        <div class="card p-4 ">
+            <div class="row mb-4">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Código *</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Fecha Inicio: *</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Fecha Fin: *</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">DNI: *</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Nombres completos: *</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Pais</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4 mt-4">
+                    <div class="col-md-4">
+                        <select name="" id="" class="form-control">
+                            <option value="">[Seleccionar]</option>
+                        </select>
+                    </div>
+                    <div class="d-flex col-md-8 ">
+                        <button class="btn btn-info me-4">Buscar</button>
+                        <button class="btn btn-secondary">Exportar Solicitudes</button>
+                    </div>
+                 
+            </div>
+            <div class="row mb-4 mt-4">
+                <label for="">estado * </label>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Marcar  / Desenmarcar Todos</label>
+                        <br>
+    
+                        <input type="checkbox">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Aprobado</label>
+                        <br>
+                        <input type="checkbox">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">No Asignado</label>
+                        <br>
+                        <input type="checkbox">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">En progreso</label>
+                        <br>
+                        <input type="checkbox">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Cancelado</label>
+                        <br>
+                        <input type="checkbox">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Terminado</label>
+                        <br>
+                        <input type="checkbox">
+                    </div>
+                </div>
+    
+    
+            </div>
+            <hr>
+            <div class="row mb-4 mt-4">
+                <div class="d-flex col-md-12 justify-content-between">
+                    <h4>Listado de informes</h4>
+                    <button class="btn btn-primary btn-sm" (click)="modal = true"> + </button>
+                </div>
+            </div>
+            <div class="row mb-4 mt-4">
+                <div class="d-flex col-md-12 justify-content-between">
+                    <div class="mb-4">
+                        <label for="" class="me-3">  Mostrar</label>
+                        <select name="" id="" class="me-3">
+                            <option value="">10</option>
+                        </select>
+                        <label for=""> Registros</label>
+                    </div>
+                    <div>
+                        <label for="">Buscar</label>
+                       <input type="text" class="form-control">
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="row mb-4 mt-4 p-4">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Código:</th>
+                                <th>Servicios</th>
+                                <th>porcentaje</th>
+                                <th>fecha y hora</th>
+                                <th>Estado</th>
+                                <th>Pais</th>
+                                <th>Empresa</th>
+                                <th>Envio</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>TRAZABILIDAD DE RIESGO LABORAL 180°(1)</td>
+                                <td><div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                      <span class="sr-only">60% completado</span>
+                                    </div>
+                                  </div></td>
+                                <td>17/06/2022 07:58:06 p.m.</td>
+                                <td>Terminado</td>
+                                <td>Peru</td>
+                                <td>OFTALMOSALUD</td>
+                                <td>
+                                    <div >
+                                        <button
+                                         class="btn btn-primary btn-success rounded-circle" style="height: 35px;" 
+                                         ></button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-primary me-2" ><i class="fa fa-circle"></i></button>
+                                        <button class="btn btn-sm btn-primary  me-2"><i class="fa fa-cloud"></i></button>
+                                        <button class="btn btn-sm btn-danger me-2"><i class="fa fa-eye"></i></button>
+                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                                      
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+    
+        </div>
+    
+    
+    
+    </div>
+</div>

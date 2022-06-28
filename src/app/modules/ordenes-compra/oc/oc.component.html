@@ -1,0 +1,146 @@
+
+<div *ngIf="modal == true">
+  <div class="container">
+  
+    <div class="card">
+      <div class="d-flex justify-content-end align-items-end">
+        <button class="btn btn-danger" (click)="modal = false">X</button>
+      </div>
+      <div class="mx-auto p-2">
+        <h2>Detalle de OC</h2>
+      </div>
+      <div  class="containter ml-4 p-3 table-responsive table-srtiped">
+        <table class="table table-srtiped " style="border-style: dotted ; box-shadow: 10px;" >
+          <thead class="thead-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Empresa</th>
+              <th scope="col">Ruc </th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Nro OC</th>
+              <th scope="col">Adjunto</th>
+              
+            </tr>
+          </thead>
+          <tbody> 
+            <tr>
+              <th scope="row">1</th>
+              <td>Alircor SA</td>
+              <td>200000020</td>
+           
+              <td>21/05/2022</td>
+              <td>t001-2</td>
+              <td></td>
+            
+            </tr>
+         
+          </tbody>
+        
+        </table>
+      </div>
+  
+      <div  class="containter ml-4 p-3 table-responsive table-srtiped">
+        <table class="table table-srtiped " style="border-style: dotted ; box-shadow: 10px;" >
+          <thead class="thead-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Item</th>
+              <th scope="col">Producto </th>
+              <th scope="col">P. Unitario</th>
+              <th scope="col">Valor </th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">IGV</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr>
+              <th scope="row">1</th>
+              <td>Visitas Domiciliarias</td>
+              <td>Verificacion de riesgo Gold</td>
+           
+              <td>5</td>
+              <td>4237.28</td>
+              <td>5</td>
+              <td>76200</td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Visitas Domiciliarias</td>
+              <td>Test de confiabilidad</td>
+           
+              <td>5</td>
+              <td>4237.28</td>
+              <td>5</td>
+              <td>76200</td>
+              <td>5000</td>
+            </tr>
+         
+          </tbody>
+        </table>
+      </div>
+   
+    </div>
+   
+</div>
+
+
+</div>
+
+
+<div *ngIf="modal == false">
+  <div class="container">
+    <div class="card">
+      <div class="row p-4">
+        <div class="col-md-6">
+          <label for=""> Desde</label>
+          <input type="date" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for=""> Hasta</label>
+          <input type="date" class="form-control">
+        </div>
+      </div>
+      <div class="mx-auto p-2">
+        <h2>Bandeja de OC</h2>
+      </div>
+    
+      <div  class="containter ml-4 p-3 table-responsive table-srtiped">
+        <table class="table table-srtiped " style="border-style: dotted ; box-shadow: 10px;" >
+          <thead class="thead-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">F. Orden</th>
+              <th scope="col">Usuario </th>
+      
+              <th scope="col">Nro Doc</th>
+              <th scope="col">Ruc</th>
+              <th scope="col">Razon Social</th>
+              <th scope="col">Transf</th>
+              <th scope="col">Adjunto</th>
+              <th scope="col">Det</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of data; let i = index"> 
+            <tr>
+              <th scope="row">{{i +1}}</th>
+              <td>{{item.f_orden}}</td>
+              <td>{{item.usuario}}</td>
+           
+              <td>{{item.nro_oc}}</td>
+              <td>{{item.ruc}}</td>
+              <td>{{item.razon_social}}</td>
+              <td><input style="margin: 0 auto;" type="checkbox" ></td>
+              <td><button class="btn btn-primary btn-sm">ver</button></td>
+              <td><button class="btn btn-info btn-sm" (click)="modal = true">ver</button></td>
+            </tr>
+         
+          </tbody>
+        </table>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
