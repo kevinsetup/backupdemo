@@ -15,6 +15,9 @@ import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSet
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
 import { ConfiguracionComponent } from './modules/configuracion/configuracion.component';
+import { DragexportsModule } from './dragexports.module';
+import { PrevisualComponentModule } from './modules/previsual-component/previsual-component.module';
+import { CameraComponentModule } from './modules/camera-component/camera-component.module';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -34,6 +37,9 @@ function appInitializer(authService: AuthService) {
     TranslateModule.forRoot(),
     HttpClientModule,
     ClipboardModule,
+    
+  
+   
 
     // #fake-start#
     environment.isMockEnabled
@@ -46,6 +52,7 @@ function appInitializer(authService: AuthService) {
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
+    
   ],
   providers: [
     {

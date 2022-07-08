@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DragComponent } from './drag.component';
+import { PrevisualComponentComponent } from './previsual-component.component';
 
-describe('DragComponent', () => {
-  let component: DragComponent;
-  let fixture: ComponentFixture<DragComponent>;
+describe('PrevisualComponentComponent', () => {
+  let component: PrevisualComponentComponent;
+  let fixture: ComponentFixture<PrevisualComponentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DragComponent ]
+      declarations: [ PrevisualComponentComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DragComponent);
+    fixture = TestBed.createComponent(PrevisualComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

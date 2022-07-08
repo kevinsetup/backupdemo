@@ -61,6 +61,11 @@ const Routing: Routes = [
     loadChildren: () =>
       import('../modules/configuracion/configuracion.module').then((m) => m.ConfiguracionModule),
   },
+  {
+    path: 'page/questions',
+    loadChildren: () =>
+      import('../modules/drag/drag.module').then((m) => m.DragModule),
+  },
 
 
   {

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DragComponent } from '../drag/drag.component';
+
 import { ConfiguracionComponent } from './configuracion.component';
-import { DragComponent } from './drag/drag.component';
+
 
 
 
@@ -14,6 +16,7 @@ const routes: Routes = [
         path: 'questions',
         component: DragComponent,
       },
+    
     
       { path: '', redirectTo: 'DragComponent', pathMatch: 'full' },
       { path: '**', redirectTo: 'oc', pathMatch: 'full' },

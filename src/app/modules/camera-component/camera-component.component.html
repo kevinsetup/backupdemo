@@ -1,0 +1,83 @@
+<div>
+  <div class="buttonClose"  mat-button (click)="onNoClick()">
+    
+    <i class="webform-svg-icon no-theme"><svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M12 1.2L10.8 0 6 4.8 1.2 0 0 1.2 4.8 6 0 10.8 1.2 12 6 7.2l4.8 4.8 1.2-1.2L7.2 6z" fill-rule="evenodd" fill="#ffffff"></path></svg></i>
+  </div>
+
+
+    <div class="video-container" *ngIf="!error">
+      <video
+        [ngClass]="{ canvas_style: isCaptured }"
+        [class.show]="!isCaptured"
+        [class.hide]="isCaptured"
+        #video
+        id="video"
+        width="738.6666666666666"
+        height="554"
+        autoplay
+      ></video>
+      <canvas
+        [ngClass]="{ canvas_style: !isCaptured }"
+        [class.show]="isCaptured"
+        [class.hide]="!isCaptured"
+        #canvas
+        id="canvas"
+        width="738.6666666666666"
+        height="554"
+      ></canvas>
+    </div>
+  
+    <div class="snap-container">
+      <div  *ngIf="!error">
+        <div *ngIf="!isCaptured" class="box_circlebutton" (click)="capture()">
+          <div class="circle_buton">
+            <i
+              ><svg
+                width="24"
+                height="20"
+                viewBox="0 0 24 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M22.264 2.778h-4.416l-.561-1.755C17.013.13 16.54 0 15.58 0H8.42c-.96 0-1.432.13-1.706 1.023l-.562 1.755H1.736C.777 2.778 0 3.555 0 4.514v13.75C0 19.223.777 20 1.736 20h20.528c.96 0 1.736-.777 1.736-1.736V4.514c0-.96-.777-1.736-1.736-1.736zM12 17.403A5.772 5.772 0 1112 5.86a5.772 5.772 0 010 11.544zM21.585 5.96a.904.904 0 110-1.808.904.904 0 010 1.808zM12 7.73a3.9 3.9 0 100 7.802 3.9 3.9 0 000-7.801z"
+                  fill="#FFF"
+                ></path></svg
+            ></i>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="isCaptured">
+        <div class="box_circlebutton" (click)="removeCurrent()" mat-button [mat-dialog-close]="captures" cdkFocusInitial>
+          <div class="circle_buton_ckeck">
+            <i
+              ><svg
+                width="20"
+                height="16"
+                viewBox="0 0 20 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 6l4 4L17 0l3 3L7 16 0 8.845z"
+                  fill="#FFF"
+                  fill-rule="evenodd"
+                ></path></svg
+            ></i>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf="error" class="text-danger mt-4">
+        {{ error }}. Por favor cierre este cuadra y vuelva a abrir.
+      </div>
+    </div>
+    <!--
+      Este elemento sirve para presentar las imagenes
+    <ul class="list-unstyled">
+      <li *ngFor="let src of captures; let idx = index" (click)="setPhoto(idx)">
+        <img [src]="src" height="50" />
+      </li>
+    </ul>
+    -->
+  </div>
+ 

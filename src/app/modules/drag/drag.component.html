@@ -1,0 +1,1043 @@
+<!-- Plantillas Icons-->
+
+<ng-template #like let-fill="fill">
+  <span style="padding-left: 8px">
+    <svg width="24" height="22" xmlns="http://www.w3.org/2000/svg">
+      <path [class.like_full]="fill === 100"
+        d="M4.831 7.929H.753A.753.753 0 000 8.682v12.08c0 .415.337.752.753.752H4.83a.753.753 0 00.754-.753V8.681a.753.753 0 00-.754-.752zM4.627 20.51H.957v-1.82h3.67v1.82zm18.195-3.934c.348-1.367-1.018-1.907-1.018-1.907.924-.102 1.515-.342 1.739-1.175.263-.98-.368-1.716-1.367-2.142.152-.015 1.677-.262 1.814-1.809.15-1.69-1.426-2.183-2.052-2.183-2.423 0-4.848 0-7.271-.002.348-.76.774-2.773.238-5.547-.212-1.096-.858-1.825-1.683-1.81-.664.01-1.298.523-1.365 1.161a21.09 21.09 0 01-.408 2.386c-.522 2.186-3.315 5.071-5.08 6.078v10.677c1.197.677 2.496.914 3.883.887 2.192-.041 8.453-.005 9.587-.012.803-.006 1.604-.389 1.989-1.358.526-1.323-.83-1.984-.83-1.984s1.485.072 1.824-1.26z"
+        stroke="#818283" stroke-width="0.4" fill="#ffffff"></path>
+    </svg>
+  </span>
+</ng-template>
+
+<ng-template #star let-fill="fill">
+  <span style="padding-left: 8px">
+    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+      <path [class.star_full]="fill === 100"
+        d="M11.893 18.47c-.493-.26-1.292-.26-1.786 0L4.84 21.239c-.493.259-.817.024-.723-.526l1.006-5.864c.094-.55-.152-1.31-.552-1.7L.31 8.997c-.4-.389-.276-.77.276-.85l5.889-.855c.551-.08 1.198-.55 1.445-1.05L10.553.905c.247-.5.647-.5.894 0l2.633 5.336c.247.5.893.97 1.445 1.05l5.889.856c.552.08.676.46.276.85l-4.26 4.153c-.4.389-.647 1.149-.553 1.699l1.006 5.864c.094.55-.229.785-.723.526l-5.267-2.77z"
+        stroke="#818283" stroke-width="0.4" fill="#ffffff"></path>
+    </svg>
+  </span>
+</ng-template>
+<ng-template #heart let-fill="fill">
+  <span  style="padding-left: 8px">
+    <svg width="24" height="20" xmlns="http://www.w3.org/2000/svg">
+      <path [class.heart_full]="fill === 100"
+        d="M17.905 0C16.35 0 14.8.58 13.608 1.736L11.99 3.29l-1.597-1.543c-2.384-2.312-6.221-2.312-8.605 0a5.804 5.804 0 000 8.38c3.325 3.224 6.651 6.442 9.977 9.666a.343.343 0 00.482 0l9.966-9.677a5.806 5.806 0 000-8.38A6.178 6.178 0 0017.905 0z"
+        stroke="#818283" stroke-width="0.4" fill="#ffffff"></path>
+    </svg>
+  </span>
+</ng-template>
+<!--End Plantillas Icons-->
+<div class="masterClass">
+
+  <div class="contenedor-make-form">
+    <div class="encuesta" style="
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        scrollbar-color: black;
+      " cdkScrollable id="style-1" #scrollBotton>
+      <div class="example-container container-encuesta">
+        <div class="container-encuesta-title" (click)="changeStyleAparence('title')"
+          [ngClass]="{'box_encuesta_after_aparence': styleAparence['title_status']}">
+          <div style="width: 42vw">
+            <p [style.text-align]="styleAparence['title_style']" style="
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                padding-bottom: 6px;
+                padding-top: 6px;
+              ">
+              {{styleAparence['title']}}
+            </p>
+          </div>
+        </div>
+        <div class="container-encuesta-description" (click)="changeStyleAparence('description')"
+          [ngClass]="{'box_encuesta_after_aparence': styleAparence['description_status']}">
+          <p style="word-wrap: break-word" [innerHTML]="styleAparence['description']"></p>
+        </div>
+        <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
+          class="example-list" (cdkDropListDropped)="drop($event)" [cdkDropListAutoScrollStep]="12">
+          <div *ngIf="condition_encuesta == true">
+            <div class="example-box box-encuesta" *ngFor="let item of done; let indexGeneral = index" cdkDrag
+              [ngClass]="{'box_encuesta_after': styleArray[indexGeneral]==true}" (click)="changeStyle(indexGeneral)"
+              (click)="editButton(indexGeneral)">
+              <div>
+                <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                <!-- Drag and drop vacio -->
+
+                <div class="title-cuestion">
+                  {{indexGeneral+1}}. {{item['title']}}
+                  <span ngDefaultControl *ngIf="item['necessary_question']==!false" style="color: red"
+                    [(ngModel)]="item['necessary_question']">*</span>
+                </div>
+                <!--  HTML Sugerencia -->
+                <div style="width: 46.2em; word-wrap: break-word" [innerHTML]="item['sugerence']"></div>
+
+                <!--  Init Input  -->
+                <div *ngIf="item['type']=='input'">
+                  <!--<mat-label>Clearable input</mat-label>-->
+                  <input class="inputStyle" matInput type="text" [(ngModel)]="item['text']" disabled />
+                </div>
+                <!--  Init TextArea  -->
+
+                <div *ngIf="item['type']=='textArea'">
+                  <!--<mat-label>Clearable input</mat-label>-->
+                  <textarea class="textAreaStyle" matInput type="text" style="height: 8em; pointer-events: none"
+                    [(ngModel)]="item['text']"></textarea>
+                </div>
+                <!--  Init Num  -->
+
+                <div *ngIf="item['type']=='num'">
+                  <!--<mat-label>Clearable input</mat-label>-->
+                  <input class="inputStyle" matInput type="number" [(ngModel)]="item['text']" disabled />
+                </div>
+                <div>
+                  <div *ngIf="item['type']=='calification'">
+                    <div *ngIf="item['calification_icon']=='star'" style="padding-bottom: 10px">
+                      <ngb-rating [(rate)]="item['calification']" [max]="item['calification_num']" [starTemplate]="star"
+                        [readonly]="true"></ngb-rating>
+                    </div>
+                    <div *ngIf="item['calification_icon']=='like'" style="padding-bottom: 10px">
+                      <ngb-rating [(rate)]="item['calification']" [max]="item['calification_num']" [starTemplate]="like"
+                        [readonly]="true"></ngb-rating>
+                    </div>
+                    <div *ngIf="item['calification_icon']=='heart'" style="padding-bottom: 10px">
+                      <ngb-rating [(rate)]="item['calification']" [max]="item['calification_num']"
+                        [starTemplate]="heart" [readonly]="true"></ngb-rating>
+                    </div>
+                  </div>
+                </div>
+                <!--  End Input  -->
+                <!--  Init MenuDesplegable  -->
+                <div *ngIf="item['type']=='select'">
+                  <mat-form-field style="pointer-events: none" appearance="fill">
+                    
+                    <mat-select required>
+                      <mat-option>-Seleccione-</mat-option>
+                      <mat-option *ngFor="let option of item['options']" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!--  End MenuDesplegable  -->
+                <!--  Init Unica Opción  -->
+                <div *ngIf="item['type']=='radioButton'">
+                  <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="item['options_selec']">
+                    <mat-radio-button class="example-radio-button" *ngFor="let option of  item['options'];let i =index;"
+                      [value]="option">
+                      <div class="radioButtonOption">{{option}}</div>
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <!--  End Unica Opción  -->
+                <!--  Init DateTime  -->
+                <div *ngIf="item['type']=='dateTime'" style="display: flex">
+                  <label style="pointer-events: none">
+                    Fecha :
+                    <input class="inputStyleDateTime" [(ngModel)]="item['date_time']" [owlDateTimeTrigger]="dt3"
+                      [owlDateTime]="dt3" />
+                    <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+                  </label>
+
+                  <label style="pointer-events: none; margin-left: 10% ;display: flex;flex-direction: column;">
+                    Hora :
+                    <input class="inputStyleTime" [(ngModel)]="item['date_time']" [owlDateTimeTrigger]="dt4"
+                      [owlDateTime]="dt4" />
+                    <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+                  </label>
+                </div>
+
+                <!--  End DatTime  -->
+                <!---  Init Date  ------>
+                <div *ngIf="item['type']=='date'">
+                  <div *ngIf="item['type_aparence_date'] == 'DD/MM/YY' ">
+                    <label style="pointer-events: none">
+                      Fecha :
+                      <input class="inputStyle" [(ngModel)]="item['date_time']" [owlDateTimeTrigger]="dt3"
+                        [owlDateTime]="dt3" />
+                      <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+                    </label>
+                  </div>
+
+                  <div *ngIf="item['type_aparence_date'] == 'MM/YY' ">
+                    <input style="
+                        visibility: hidden;
+                        position: absolute;
+                        margin: auto;
+                        pointer-events: none;
+                      " class="shadow-input" name="date_time" [(ngModel)]="item['date_time']" [owlDateTime]="dt6" />
+
+                    <label style="margin-right: 0; pointer-events: none">
+                      Fecha :
+                      <input class="inputStyle" [owlDateTimeTrigger]="dt6"
+                        [value]="item['date_time'] | dateFilter:dateFormatMaY" />
+                      <owl-date-time [pickerType]="'calendar'" [startView]="'year'" #dt6></owl-date-time>
+                    </label>
+                  </div>
+                  <div *ngIf="item['type_aparence_date'] == 'YY' ">
+                    <input style="
+                        visibility: hidden;
+                        position: absolute;
+                        margin: auto;
+                        pointer-events: none;
+                      " class="shadow-input" name="date_time" [(ngModel)]="item['date_time']" [owlDateTime]="dt6" />
+
+                    <label style="margin-right: 0; pointer-events: none">
+                      Fecha :
+                      <input class="inputStyle" [owlDateTimeTrigger]="dt6"
+                        [value]="item['date_time'] | dateFilter:dateFormatYear" />
+                      <owl-date-time [pickerType]="'calendar'" [startView]="'year'" #dt6></owl-date-time>
+                    </label>
+                  </div>
+                </div>
+
+                <!---  End Date  -->
+                <!--  Init Map  -->
+                <div *ngIf="item['type']=='map'">
+                  
+                  <div class="editMap" > Abrir Mapa</div>
+
+                </div>
+
+                <!--  End Map  -->
+                <!--  Init image  -->
+                <div *ngIf="item['type']=='image'">
+                  <div *ngIf="item['type_origin']=='ArchivoOCamara'">
+                    <div *ngIf="item['name_archiveordocument'] !=null">
+                      <div *ngFor="let data of item['name_archiveordocument']; let i = index">
+                        <div class="wrapper" style="background-color: white">
+                          <div style="
+                              background-color: #cfcfcf;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                            ">
+                            <div style="font-size: larger; font-weight: bold">
+                              {{data.name.split('.').pop()}}
+                            </div>
+                          </div>
+                          <div style="
+                              background-color: white;
+                              align-self: center;
+                              display: flex;
+                              justify-content: center;
+                            ">
+                            <input type="text" [(ngModel)]="data.name" class="inputEdit" />
+                          </div>
+
+                          <div style="background-color: white; align-self: center">
+                            {{(data.size/1048576).toFixed(2)}} MB
+                          </div>
+                          <div>&nbsp;</div>
+                          <div (click)="deleteInput(indexGeneral,  i)"
+                            style="background-color: white; align-self: center">
+                            <i><svg width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M5 0h4a1 1 0 011 1v1h3.5a.5.5 0 110 1h-1v11a2 2 0 01-2 2h-7a2 2 0 01-2-2V3h-1a.5.5 0 010-1H4V1a1 1 0 011-1zm0 1v1h4V1H5zM2.5 3v11a1 1 0 001 1h7a1 1 0 001-1V3h-9zm7 2a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7a.5.5 0 01.5-.5zM7 5a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7A.5.5 0 017 5zM4.5 5a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7a.5.5 0 01.5-.5z"
+                                  fill="var(--main-theme)" fill-rule="evenodd"></path>
+                              </svg></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="imageArea">
+                      <div class="imageAreaText">
+                        <label class="form-block-input" style="pointer-events: none;">
+                          <input type="file" name="custom-file" class="form-file" (change)="fileChange($event)"  />
+                          <span style="overflow-wrap: break-word; text-align: center;" >
+                            <span class="form-file-span">Seleccionar archivo
+                            </span>
+                            <span>{{item['text_information']}}</span>
+                          </span>
+                        </label>
+                      </div>
+
+                      <div class="imageAreaCamera" (click)="openDialogCamera()" style="pointer-events: none;">
+                        <i><svg width="24" height="20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M22.5 4h-5.407l-.207-.727-.555-1.957C16.229.984 16.259 1 15.58 1H8.42c-.679 0-.648-.016-.745.297L6.907 4H1.5c-.407 0-.5.093-.5.5v14c0 .407.093.5.5.5h21c.407 0 .5-.093.5-.5v-14c0-.407-.093-.5-.5-.5zm0-1c.959 0 1.5.541 1.5 1.5v14c0 .959-.541 1.5-1.5 1.5h-21C.541 20 0 19.459 0 18.5v-14C0 3.541.541 3 1.5 3h4.652l.562-1.977C6.988.13 7.46 0 8.42 0h7.16c.96 0 1.433.13 1.707 1.023L17.848 3H22.5zM12 16a5 5 0 100-10 5 5 0 000 10zm0 1a6 6 0 110-12 6 6 0 010 12zm0-9a3 3 0 100 6 3 3 0 000-6zm0-1a4 4 0 110 8 4 4 0 010-8zm9 0a1 1 0 110-2 1 1 0 010 2z"
+                              fill="var(--main-theme)"></path>
+                          </svg></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="item['type_origin']=='Camara'">
+                    <div *ngIf="item['name_archiveordocument']!=null">
+                      <div *ngFor="let data of item['name_archiveordocument']; let i = index">
+                        <div class="wrapper" style="background-color: white">
+                          <div style="
+                              background-color: #cfcfcf;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                            ">
+                            <div style="font-size: larger; font-weight: bold">
+                              {{data.name.split('.').pop()}}
+                            </div>
+                          </div>
+                          <div style="
+                              background-color: white;
+                              align-self: center;
+                              display: flex;
+                              justify-content: center;
+                            ">
+                            <input type="text" [(ngModel)]="data.name" class="inputEdit" />
+                          </div>
+
+                          <div style="background-color: white; align-self: center">
+                            {{(data.size/1048576).toFixed(2)}} MB
+                          </div>
+                          <div>&nbsp;</div>
+                          <div (click)="deleteInput(indexGeneral,  i)"
+                            style="background-color: white; align-self: center">
+                            <i><svg width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M5 0h4a1 1 0 011 1v1h3.5a.5.5 0 110 1h-1v11a2 2 0 01-2 2h-7a2 2 0 01-2-2V3h-1a.5.5 0 010-1H4V1a1 1 0 011-1zm0 1v1h4V1H5zM2.5 3v11a1 1 0 001 1h7a1 1 0 001-1V3h-9zm7 2a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7a.5.5 0 01.5-.5zM7 5a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7A.5.5 0 017 5zM4.5 5a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7a.5.5 0 01.5-.5z"
+                                  fill="var(--main-theme)" fill-rule="evenodd"></path>
+                              </svg></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="imageArea">
+                      <div class="imageAreaTextCamera" style="width: 95%" (click)="openDialogCamera()" style="pointer-events: none;">
+                        <p>Hacer una foto &nbsp;</p>
+                        <p>{{item['text_information']}}</p>
+
+                        <i style="margin-left: 3%"><svg width="24" height="20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M22.5 4h-5.407l-.207-.727-.555-1.957C16.229.984 16.259 1 15.58 1H8.42c-.679 0-.648-.016-.745.297L6.907 4H1.5c-.407 0-.5.093-.5.5v14c0 .407.093.5.5.5h21c.407 0 .5-.093.5-.5v-14c0-.407-.093-.5-.5-.5zm0-1c.959 0 1.5.541 1.5 1.5v14c0 .959-.541 1.5-1.5 1.5h-21C.541 20 0 19.459 0 18.5v-14C0 3.541.541 3 1.5 3h4.652l.562-1.977C6.988.13 7.46 0 8.42 0h7.16c.96 0 1.433.13 1.707 1.023L17.848 3H22.5zM12 16a5 5 0 100-10 5 5 0 000 10zm0 1a6 6 0 110-12 6 6 0 010 12zm0-9a3 3 0 100 6 3 3 0 000-6zm0-1a4 4 0 110 8 4 4 0 010-8zm9 0a1 1 0 110-2 1 1 0 010 2z"
+                              fill="var(--main-theme)"></path>
+                          </svg></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--  End image  -->
+
+                <!--  init document  -->
+
+                <div *ngIf="item['type']=='document'">
+                  <div *ngIf="item['type_select'] == 'documento'">
+                    <div *ngIf="item['name_archiveordocument']!=null">
+                      <div *ngFor="let data of item['name_archiveordocument']; let i = index">
+                        <div class="wrapper" style="background-color: white">
+                          <div style="
+                              background-color: #cfcfcf;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                             
+                            ">
+                            <div style="font-size: larger; font-weight: bold">
+                              {{data.name.split('.').pop()}}
+                            </div>
+                          </div>
+                          <div style="
+                              background-color: white;
+                              align-self: center;
+                              display: flex;
+                              justify-content: center;
+                            ">
+                            <input type="text" value="{{data.name.split('.').slice(0, -1).join('.') }}" [disabled]=""
+                              class="inputEdit" />
+                          </div>
+                          <div style="background-color: white; align-self: center">
+                            {{(data.size/1048576).toFixed(2)}} MB
+                          </div>
+                          <div>&nbsp;</div>
+                          <div (click)="deleteInput(indexGeneral,  i)"
+                            style="background-color: white; align-self: center">
+                            <i><svg width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M5 0h4a1 1 0 011 1v1h3.5a.5.5 0 110 1h-1v11a2 2 0 01-2 2h-7a2 2 0 01-2-2V3h-1a.5.5 0 010-1H4V1a1 1 0 011-1zm0 1v1h4V1H5zM2.5 3v11a1 1 0 001 1h7a1 1 0 001-1V3h-9zm7 2a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7a.5.5 0 01.5-.5zM7 5a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7A.5.5 0 017 5zM4.5 5a.5.5 0 01.5.5v7a.5.5 0 11-1 0v-7a.5.5 0 01.5-.5z"
+                                  fill="var(--main-theme)" fill-rule="evenodd"></path>
+                              </svg></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <label class="form-block-input" style="pointer-events: none;">
+                      <input type="file" name="custom-file" class="form-file"
+                        accept=".{{item.answer_document.join(', .') }}  " (change)="fileChange($event)" />
+                      <span style="overflow-wrap: break-word; text-align: center">
+                        <span class="form-file-span">Seleccionar archivo </span>
+                        <span>{{item['text_information']}}</span>
+                        <span>(Soporte:</span>
+
+                        <span>{{item['answer_document']}}</span>
+
+                        <span class="form-file-span">) </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div *ngIf="item['type_select'] == 'archivo'">
+                    <label class="form-block-input" style="pointer-events: none;">
+                      <input type="file" name="custom-file" class="form-file"
+                        accept=".{{item.answer_archive.join(', .') }} " />
+                      <span style="overflow-wrap: break-word; text-align: center">
+                        <span class="form-file-span">Seleccionar archivo </span>
+                        <span>{{item['text_information']}}</span>
+                        <span>(Soporte:</span>
+
+                        <span>{{item['answer_archive']}}</span>
+
+                        <span class="form-file-span">) </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <!--  end document  -->
+
+                <!-- Botones eliminar,duplicar -->
+                <div *ngIf="styleArray[indexGeneral]==true"
+                  [ngClass]="{'box_encuesta_delete_after': styleArray[indexGeneral]==true}">
+                  <div class="delete-ofList" style="padding-right: 15px; margin-right: 8px"
+                    (click)="deleteComponent(indexGeneral)">
+                    <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 1.4L12.6 0 7 5.6 1.4 0 0 1.4 5.6 7 0 12.6 1.4 14 7 8.4l5.6 5.6 1.4-1.4L8.4 7z"
+                        fill="#FFF" fill-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div class="edit_ofList" style="padding-right: 15px"
+                    (click)="duplicateComponent(indexGeneral,item,$event)">
+                    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M16 13.09V1.456A1.46 1.46 0 0014.545 0H2.91v2H14v11.09h2zM11.26 16c.773 0 1.407-.633 1.407-1.407V4.74c0-.774-.634-1.408-1.408-1.408H1.407A1.413 1.413 0 000 4.741v9.852A1.41 1.41 0 001.407 16h9.852zm-.593-10.667V14H2V5.333h8.667z"
+                        fill="#FFF" fill-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="condition_encuesta==false">
+            <div class="encuesta_vacia">
+              <div>
+                <p>
+                  Arrastre o pulse el panel derecho para agregar la primera
+                  pregunta.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-encuesta-send" (click)="changeStyleAparence('send')"
+          [ngClass]="{'box_encuesta_after_aparence': styleAparence['send_status']}"
+          style="display: flex; justify-content: center">
+          <button class="button_send" >{{styleAparence['send']}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="componentes">
+      <div class="componentes-button">
+        <div class="button-parts" [ngClass]="add()" (click)="addButton()">
+          <div style="padding-top: 10px; margin-left: 45%">
+            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" style="transform: scale(1.5, 1.5)">
+              <path
+                d="M8.8 4H7.2v3.2H4v1.6h3.2V12h1.6V8.8H12V7.2H8.8V4zM8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14.4c-3.52 0-6.4-2.88-6.4-6.4 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.52-2.88 6.4-6.4 6.4z"
+                fill="var(--main-theme)" fill-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div style="padding-top: 7px; color: var(--main-theme)">Agregar</div>
+        </div>
+        <div class="button-parts" [ngClass]="edit()" (click)="editButton(object_edit)">
+          <div style="padding-top: 10px; margin-left: 45%">
+            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" style="transform: scale(1.5, 1.5)">
+              <path
+                d="M0 12.622V16h3.378l9.778-9.867-3.378-3.377L0 12.622zm15.733-9.066a.86.86 0 000-1.245L13.69.267a.86.86 0 00-1.245 0l-1.6 1.6 3.378 3.377 1.511-1.688z"
+                fill="var(--main-theme)" fill-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div style="padding-top: 7px; color: var(--main-theme)">Editar</div>
+        </div>
+        <div class="button-parts" [ngClass]="aparence()" (click)="aparenceButton()">
+          <div style="padding-top: 10px; margin-left: 45%">
+            <svg xmlns="http://www.w3.org/2000/svg" style="transform: scale(1.5, 1.5)" width="16" height="14"
+              fill="var(--main-theme)" class="bi bi-palette-fill" viewBox="0 0 16 16">
+              <path
+                d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+            </svg>
+          </div>
+          <div style="padding-top: 7px; color: var(--main-theme)">Apariencia</div>
+        </div>
+        <div class="example-container-componentes container_componentes" id="style-2" cdkScrollable>
+          <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
+            cdkDropListSortingDisabled>
+            <div class="example-list2" *ngIf="state_components == 'add' ">
+              <div class="box-component" *ngFor="let item of todo" cdkDrag
+                (click)="addComponent(item);scrollToTop(scrollBotton)">
+                <i class="svg_component"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 11h2.5a.5.5 0 00.5-.5v-5a.5.5 0 00-.5-.5H12V4h2.5A1.5 1.5 0 0116 5.5v5a1.5 1.5 0 01-1.5 1.5H12v-1zM9 5V4H1.5A1.5 1.5 0 000 5.5v5A1.5 1.5 0 001.5 12H9v-1H1.5a.5.5 0 01-.5-.5v-5a.5.5 0 01.5-.5H9zm3.5-5H14v1h-1.5A1.5 1.5 0 0011 2.5v11a1.5 1.5 0 001.5 1.5H14v1h-1.5a2.496 2.496 0 01-2-1c-.456.607-1.182 1-2 1H7v-1h1.5a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 008.5 1H7V0h1.5c.818 0 1.544.393 2 1 .456-.607 1.182-1 2-1z">
+                    </path>
+                  </svg></i>
+                <span class="mini-component">{{item['name']}}</span>
+              </div>
+            </div>
+            <div class="input-component" *ngIf="state_components == 'edit' ">
+              <div *ngIf="object_edit == -1 && 
+                styleAparence['title_status']==false && 
+                styleAparence['description_status']==false &&
+                styleAparence['send_status']==false">
+                No se ha seleccionado ninguna pregunta para editar. Seleccione una
+                pregunta en el área de vista previa para editarla.
+              </div>
+              <div *ngIf="styleAparence['title_status']==true ">
+                <div style="font-size: 17; font-weight: 500; padding-bottom: 12px">
+                  Encabezado de la encuesta
+                </div>
+                <div style="padding-top: 12px">
+                  <mat-radio-group aria-label="Select an option" [(ngModel)]="styleAparence['title_opcion']">
+                    <mat-radio-button value="text">Texto</mat-radio-button>
+                    <mat-radio-button value="image" style="margin-left: 8vw">Imagen</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div style="
+                    font-weight: 400;
+                    padding-bottom: 0px;
+                    width: 100%;
+                    padding-top: 15px;
+                  ">
+                  Texto
+                </div>
+                <input class="inputStyleComponent" matInput type="text" [(ngModel)]="styleAparence['title']" />
+                <div style="
+                    font-weight: 400;
+                    padding-bottom: 0px;
+                    width: 100%;
+                    padding-top: 15px;
+                    display: flex;
+                  ">
+                  Alineación:
+                  <div style="
+                      margin-left: 15px;
+                      padding: 5px;
+                      background: white;
+                      border: 1px solid var(--main-theme);
+                      cursor: pointer;
+                    " [ngClass]="{'title_style': styleAparence['title_style'] =='left'}"
+                    (click)="changeStyleAparenceTitle('left')">
+                    <i>
+                      <svg [ngClass]="{'title_style_i': styleAparence['title_style'] =='left'}"
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-text-left" viewBox="0 0 16 16" style="transform: scale(1.4, 1.4)">
+                        <path fill-rule="evenodd"
+                          d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                      </svg>
+                    </i>
+                  </div>
+                  <div style="
+                      padding: 5px;
+                      background: white;
+                      border: 1px solid var(--main-theme);
+                      cursor: pointer;
+                    " [ngClass]="{'title_style': styleAparence['title_style'] =='center'}"
+                    (click)="changeStyleAparenceTitle('center')">
+                    <i>
+                      <svg [ngClass]="{'title_style_i': styleAparence['title_style'] =='center'}"
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-text-center" viewBox="0 0 16 16" style="transform: scale(1.4, 1.4)">
+                        <path fill-rule="evenodd"
+                          d="M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                      </svg>
+                    </i>
+                  </div>
+                  <div style="
+                      padding: 5px;
+                      background: white;
+                      border: 1px solid var(--main-theme);
+                      cursor: pointer;
+                    " [ngClass]="{'title_style': styleAparence['title_style'] =='right'}"
+                    (click)="changeStyleAparenceTitle('right')">
+                    <i>
+                      <svg [ngClass]="{'title_style_i': styleAparence['title_style'] =='right'}"
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-text-right" viewBox="0 0 16 16" style="transform: scale(1.4, 1.4)">
+                        <path fill-rule="evenodd"
+                          d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                      </svg>
+                    </i>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="styleAparence['description_status']==true ">
+                <div style="font-size: 17; font-weight: 500; padding-bottom: 12px">
+                  Descripción de la encuesta
+                </div>
+                <div style="width: 28.4em; padding-bottom: 8px">
+                  <quill-editor style="width: 28.4em" [(ngModel)]="styleAparence['description']" [modules]="quillConfig"
+                    (onSelectionChanged)="onSelectionChanged($event)" (onContentChanged)="onContentChanged($event)">
+                  </quill-editor>
+                </div>
+              </div>
+              <div *ngIf="styleAparence['send_status']==true ">
+                <div style="font-size: 17; font-weight: 500; padding-bottom: 18px">
+                  Botón Enviar
+                </div>
+                <div style="font-weight: 450; padding-bottom: 5px; width: 100%">
+                  Texto de botón
+                </div>
+
+                <input class="inputStyleComponent" matInput type="text" [(ngModel)]="styleAparence['send']" />
+              </div>
+              <div *ngIf="object_edit > -1 ">
+                <div style="font-size: 17; font-weight: 500; padding-bottom: 12px">
+                  {{done[object_edit]['name']}}
+                </div>
+                <div style="font-weight: 450; padding-bottom: 0px; width: 100%">
+                  Etiqueta
+                </div>
+                <!--<mat-label>Clearable input</mat-label>-->
+                <input class="inputStyleComponent" matInput type="text" [(ngModel)]="done[object_edit]['title']" />
+
+                <div>
+                  <!--Quill Editor-->
+                  <div style="font-weight: 450; padding-bottom: 8px; width: 100%">
+                    Sugerencia
+                  </div>
+                  <div style="width: 28.4em; padding-bottom: 8px">
+                    <quill-editor style="width: 28.4em" [(ngModel)]="done[object_edit]['sugerence']"
+                      placeholder="Indique al usuario cómo debe rellenar esta pregunta" [modules]="quillConfig"
+                      (onSelectionChanged)="onSelectionChanged($event)" (onContentChanged)="onContentChanged($event)">
+                    </quill-editor>
+                  </div>
+                </div>
+                <!--------------------- Calification Component ------------------------------->
+                <div *ngIf="done[object_edit]['type']=='calification'">
+                  <div style="font-weight: 450; padding-bottom: 8px; width: 100%">
+                    Valor máximo
+                  </div>
+                  <div style="padding-bottom: 1em; display: flex">
+                    <div (click)="changeValueCalification(3)" style="cursor: hand" class="box_icon_value"
+                      [ngClass]="{'box_icon_after': done[object_edit]['calification_num']==3}">
+                      3
+                    </div>
+                    <div (click)="changeValueCalification(5)" style="cursor: hand" class="box_icon_value"
+                      [ngClass]="{'box_icon_after': done[object_edit]['calification_num']==5}">
+                      5
+                    </div>
+                    <div (click)="changeValueCalification(10)" style="cursor: hand" class="box_icon_value"
+                      [ngClass]="{'box_icon_after': done[object_edit]['calification_num']==10}">
+                      10
+                    </div>
+                  </div>
+
+                  <div style="font-weight: 450; padding-bottom: 8px; width: 100%">
+                    Valor predeterminado
+                  </div>
+                  <div *ngIf="done[object_edit]['calification_icon']=='star'" style="padding-bottom: 10px">
+                    <ngb-rating [(rate)]="done[object_edit]['calification']"
+                      [max]="done[object_edit]['calification_num']" [starTemplate]="star" [readonly]="false">
+                    </ngb-rating>
+                  </div>
+                  <div *ngIf="done[object_edit]['calification_icon']=='like'" style="padding-bottom: 10px">
+                    <ngb-rating [(rate)]="done[object_edit]['calification']"
+                      [max]="done[object_edit]['calification_num']" [starTemplate]="like" [readonly]="false">
+                    </ngb-rating>
+                  </div>
+                  <div *ngIf="done[object_edit]['calification_icon']=='heart'" style="padding-bottom: 10px">
+                    <ngb-rating [(rate)]="done[object_edit]['calification']"
+                      [max]="done[object_edit]['calification_num']" [starTemplate]="heart" [readonly]="false">
+                    </ngb-rating>
+                  </div>
+                  <div style="font-weight: 450; padding-bottom: 8px; width: 100%">
+                    Icono
+                  </div>
+                  <div style="display: flex; margin-bottom: 1em">
+                    <div class="box_icon star"
+                      [ngClass]="{'box_icon_after': done[object_edit]['calification_icon']=='star'}"
+                      style="cursor: hand" (click)="changeIcon('star')">
+                      <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M11.893 18.47c-.493-.26-1.292-.26-1.786 0L4.84 21.239c-.493.259-.817.024-.723-.526l1.006-5.864c.094-.55-.152-1.31-.552-1.7L.31 8.997c-.4-.389-.276-.77.276-.85l5.889-.855c.551-.08 1.198-.55 1.445-1.05L10.553.905c.247-.5.647-.5.894 0l2.633 5.336c.247.5.893.97 1.445 1.05l5.889.856c.552.08.676.46.276.85l-4.26 4.153c-.4.389-.647 1.149-.553 1.699l1.006 5.864c.094.55-.229.785-.723.526l-5.267-2.77z"
+                          fill="#F5C415"></path>
+                      </svg>
+                    </div>
+                    <div class="box_icon heart"
+                      [ngClass]="{'box_icon_after': done[object_edit]['calification_icon']=='heart'}"
+                      style="cursor: hand" (click)="changeIcon('heart')">
+                      <svg width="24" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M17.905 0C16.35 0 14.8.58 13.608 1.736L11.99 3.29l-1.597-1.543c-2.384-2.312-6.221-2.312-8.605 0a5.804 5.804 0 000 8.38c3.325 3.224 6.651 6.442 9.977 9.666a.343.343 0 00.482 0l9.966-9.677a5.806 5.806 0 000-8.38A6.178 6.178 0 0017.905 0z"
+                          fill="#D65940"></path>
+                      </svg>
+                    </div>
+                    <div class="box_icon like"
+                      [ngClass]="{'box_icon_after': done[object_edit]['calification_icon']=='like'}"
+                      style="cursor: hand" (click)="changeIcon('like')">
+                      <svg width="24" height="22" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M4.831 7.929H.753A.753.753 0 000 8.682v12.08c0 .415.337.752.753.752H4.83a.753.753 0 00.754-.753V8.681a.753.753 0 00-.754-.752zM4.627 20.51H.957v-1.82h3.67v1.82zm18.195-3.934c.348-1.367-1.018-1.907-1.018-1.907.924-.102 1.515-.342 1.739-1.175.263-.98-.368-1.716-1.367-2.142.152-.015 1.677-.262 1.814-1.809.15-1.69-1.426-2.183-2.052-2.183-2.423 0-4.848 0-7.271-.002.348-.76.774-2.773.238-5.547-.212-1.096-.858-1.825-1.683-1.81-.664.01-1.298.523-1.365 1.161a21.09 21.09 0 01-.408 2.386c-.522 2.186-3.315 5.071-5.08 6.078v10.677c1.197.677 2.496.914 3.883.887 2.192-.041 8.453-.005 9.587-.012.803-.006 1.604-.389 1.989-1.358.526-1.323-.83-1.984-.83-1.984s1.485.072 1.824-1.26z"
+                          fill="#3bbde1"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <!---------------------End Calification Component ------------------------------->
+
+                <!---------------------Start dateTime Component ------------------------------->
+                <div *ngIf="done[object_edit]['type']=='dateTime'" style="width: 100%">
+                  <div style="font-weight: 450; padding-bottom: 5px; width: 100%">
+                    Valor predeterminado
+                  </div>
+                  <mat-radio-group aria-labelledby="example-radio-group-label"
+                    aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="done[object_edit]['date_time_type']" (click)="$event.stopPropagation()">
+                    <mat-radio-button #buttonDateTime
+                      (click)="checkStateDateTime($event, buttonDateTime);$event.stopPropagation()" value="now">Enviando
+                      fecha y hora</mat-radio-button>
+                    <br />
+                    <mat-radio-button #buttonDateTime2
+                      (click)="checkStateDateTime($event, buttonDateTime2);$event.stopPropagation()" value="especific">
+                      Fecha y hora especificas</mat-radio-button>
+                  </mat-radio-group>
+                  <div *ngIf="done[object_edit]['date_time_type']=='especific'">
+                    <input style="margin-left: 2em" class="input-component" [(ngModel)]="done[object_edit]['date_time']"
+                      [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" />
+                    <owl-date-time #dtPicker1></owl-date-time>
+                  </div>
+                </div>
+
+                <!---------------------End dateTime Component ------------------------------->
+
+                <!---------------------Start date Component ------------------------------->
+                <div *ngIf="done[object_edit]['type']=='date'" style="width: 100%">
+                  <div style="font-weight: 450; padding-bottom: 5px; width: 100%">
+                    Valor predeterminado
+                  </div>
+                  <mat-radio-group aria-labelledby="example-radio-group-label"
+                    aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="done[object_edit]['date_time_type']" (click)="$event.stopPropagation()">
+                    <mat-radio-button #buttonDate
+                      (click)="checkStateDateTime($event, buttonDate);$event.stopPropagation()" value="now">Enviando
+                      fecha</mat-radio-button>
+                    <br />
+                    <mat-radio-button #buttonDate2
+                      (click)="checkStateDateTime($event, buttonDate2);$event.stopPropagation()" value="especific">Fecha
+                    </mat-radio-button>
+                  </mat-radio-group>
+                  <div *ngIf="done[object_edit]['date_time_type']=='especific'">
+                    <input style="margin-left: 2em" class="input-component" [(ngModel)]="done[object_edit]['date_time']"
+                      [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" />
+                    <owl-date-time #dtPicker1></owl-date-time>
+                  </div>
+                  <div style="font-size: 17; font-weight: 500; padding-bottom: 9px">
+                    Apariencia
+                  </div>
+
+                  <mat-radio-group aria-labelledby="example-radio-group-label"
+                    aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="done[object_edit]['type_aparence_date']" (click)="$event.stopPropagation()">
+                    <mat-radio-button value="DD/MM/YY">Día,mes y año
+                    </mat-radio-button>
+                    <br />
+                    <mat-radio-button value="MM/YY">Mes y año</mat-radio-button>
+                    <br />
+                    <mat-radio-button value="YY">Solo año</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <!---------------------End date Component ------------------------------->
+                <!---------------------Start textArea Component ------------------------------->
+                <div *ngIf="done[object_edit]['type']=='textArea'" style="width: 100%">
+                  <div style="font-weight: 450; padding-bottom: 0px; width: 100%">
+                    Valor predeterminado
+                  </div>
+
+                  <!--<mat-label>Clearable input</mat-label>-->
+                  <textarea placeholder="Indique al usuario cómo debe rellenar esta pregunta"
+                    class="inputStyleComponentTextArea" matInput type="text" style="height: 6em"
+                    [(ngModel)]="done[object_edit]['text']"></textarea>
+                </div>
+                <!---------------------End textArea Component ------------------------------->
+                <!---------------------Start Num Component ------------------------------->
+                <div *ngIf="done[object_edit]['type']=='num'" style="width: 100%">
+                  <div style="font-weight: 450; padding-bottom: 0px; width: 100%">
+                    Valor predeterminado
+                  </div>
+                  <input class="inputStyleComponent" matInput type="number" pattern="[0-9.]+" knifeOnlyNumbers
+                    [(ngModel)]="done[object_edit]['text']" />
+                </div>
+
+                <!---------------------End Num Component ------------------------------->
+                <!---------------------Start Map Component ------------------------------->
+                <div *ngIf="done[object_edit]['type']=='map'">
+                  <div class="map" style="height: 300px; width: 95%;" leaflet [leafletOptions]="done[object_edit]['optionsMap']"
+                    [(leafletCenter)]="done[object_edit]['center']" [(leafletZoom)]="done[object_edit]['zoom']"
+                    (leafletMouseUp)="ubicationSave(object_edit,$event)"
+                    (leafletMapZoomEnd)="zoomSave(object_edit,$event)"></div>
+                </div>
+                <!---------------------End Map Component ------------------------------->
+                <!---------------------Start Image Component ------------------------------->
+                <div *ngIf="done[object_edit]['type']=='image'">
+                  <div style="font-weight: 450; padding-bottom: 0px; width: 100%">
+                    Origen de la imagen
+                  </div>
+                  <mat-radio-group aria-labelledby="example-radio-group-label"
+                    aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="done[object_edit]['type_origin']" (click)="$event.stopPropagation()">
+                    <mat-radio-button value="ArchivoOCamara">Examine imágenes o utilice la cámara
+                    </mat-radio-button>
+                    <br />
+                    <mat-radio-button value="Camara">Solo la cámara</mat-radio-button>
+                  </mat-radio-group>
+                  <div style="font-size: 17; font-weight: 500">
+                    Recuento de archivos
+                  </div>
+                  <br />
+                  <mat-radio-group class="example-radio-group_image" style="margin: 0px"
+                    [(ngModel)]="done[object_edit]['type_recuent_image']" (click)="$event.stopPropagation()">
+                    <mat-radio-button value="especific"
+                      (click)="textInformationChangeInput(object_edit,'especific',$event)"><span>Especificar recuento de
+                        archivos</span>
+                    </mat-radio-button>
+                    <div style="padding-top: 9px; padding-left: 25px">
+                      <!--<mat-label>Clearable input</mat-label>-->
+                      <input [disabled]="done[object_edit]['type_recuent_image']!='especific'"
+                        class="inputStyleComponent" matInput pattern="[0-9.]+" knifeOnlyNumbers
+                        [(ngModel)]="done[object_edit]['recuent_especific']"
+                        (keyup)="textInformationChangeInput(object_edit,'especific',$event)"
+                        (change)="textInformationChangeInput(object_edit,'especific',$event)" [min]="0" [max]="99"
+                        minMax [maxlength]="2" />
+                    </div>
+                    <mat-radio-button value="range" (click)="textInformationChangeInput(object_edit,'range',$event)">
+                      Definir el recuento mínimo y máximo de
+                      archivos</mat-radio-button>
+                  </mat-radio-group>
+                  <div style="padding-top: 9px; padding-left: 25px">
+                    Mínimo
+                    <!--<mat-label>Clearable input</mat-label>-->
+                    <input class="inputStyleComponent" [disabled]="done[object_edit]['type_recuent_image']!='range'"
+                      matInput pattern="[0-9.]+" knifeOnlyNumbers [(ngModel)]="done[object_edit]['recuent_min_archive']"
+                      (keyup)="textInformationChangeInput(object_edit,'range',$event)"
+                      (change)="textInformationChangeInput(object_edit,'range',$event)" [min]="0" [max]="99" minMax
+                      [maxlength]="2" />
+                  </div>
+                  <div style="
+                      padding-top: 9px;
+                      padding-left: 25px;
+                      margin-bottom: 5px;
+                    ">
+                    Máximo
+                    <!--<mat-label>Clearable input</mat-label>-->
+                    <input class="inputStyleComponent" [disabled]="done[object_edit]['type_recuent_image']!='range'"
+                      matInput pattern="[0-9.]+" knifeOnlyNumbers [(ngModel)]="done[object_edit]['recuent_max_archive']"
+                      (keyup)="textInformationChangeInput(object_edit,'range',$event)"
+                      (change)="textInformationChangeInput(object_edit,'range',$event)" [min]="0" [max]="99" minMax
+                      [maxlength]="2" />
+                  </div>
+                </div>
+                <!---------------------End Image Component ------------------------------->
+                <!---------------------Start document Component ------------------------------->
+                <div *ngIf="done[object_edit]['type']=='document'" style="width: 100%">
+                  <div style="font-weight: 450; padding-bottom: 0px; width: 100%">
+                    Tipos de archivos permitidos
+                  </div>
+                  <mat-form-field appearance="fill">
+                    <mat-label>[Seleccione]</mat-label>
+                    <mat-select [(ngModel)]="done[object_edit]['type_select']">
+                      <mat-option value="documento"> Documento </mat-option>
+                      <mat-option value="archivo"> Archivo </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="done[object_edit]['type_select'] == 'documento'">
+                    <p>Elegir los tipos de archivo permitido</p>
+
+                    <mat-grid-list cols="3" rowHeight="5:1">
+                      <div *ngFor="let option of done[object_edit]['options_document'].slice(0,8)">
+                        <mat-grid-tile style="width: 100px">
+                          <div class="checkboxStyle">
+                            <input #check type="checkbox" name="genres" value="adventure" id="{{option}}"
+                              [checked]="done[object_edit]['answer_document'].indexOf(option)>=0"
+                              (change)="onChangeDocument(object_edit,option, check.checked)" />
+                            <label for="{{option}}"
+                              style="font-family: 'SExtralight'; font-size: 14px">{{option}}</label>
+                          </div>
+                        </mat-grid-tile>
+                      </div>
+                    </mat-grid-list>
+                    <br />
+                  </div>
+                  <div *ngIf="done[object_edit]['type_select'] == 'archivo'">
+                    <p>Elegir los tipos de archivo permitido</p>
+                    <mat-grid-list cols="3" rowHeight="5:1">
+                      <div *ngFor="let option of done[object_edit]['options_document'].slice(8,11)">
+                        <mat-grid-tile style="width: 100px">
+                          <div class="checkboxStyle">
+                            <input #check type="checkbox" name="genres" value="adventure" id="{{option}}"
+                              [checked]="done[object_edit]['answer_archive'].indexOf(option)>=0"
+                              (change)="onChangeArchive(object_edit,option, check.checked)" />
+                            <label for="{{option}}"
+                              style="font-family: 'SExtralight'; font-size: 14px">{{option}}</label>
+                          </div>
+                        </mat-grid-tile>
+                      </div>
+                    </mat-grid-list>
+                  </div>
+                  <div style="font-size: 17; font-weight: 500">
+                    Recuento de archivos
+                  </div>
+                  <br />
+                  <mat-radio-group class="example-radio-group_image" style="margin: 0px"
+                    [(ngModel)]="done[object_edit]['type_recuent_image']" (click)="$event.stopPropagation()">
+                    <mat-radio-button value="especific"
+                      (click)="textInformationChangeInput(object_edit,'especific',$event)"><span>Especificar recuento de
+                        archivos</span>
+                    </mat-radio-button>
+                    <div style="padding-top: 9px; padding-left: 25px">
+                      <!--<mat-label>Clearable input</mat-label>-->
+                      <input [disabled]="done[object_edit]['type_recuent_image']!='especific'"
+                        class="inputStyleComponent" matInput pattern="[0-9.]+" knifeOnlyNumbers
+                        [(ngModel)]="done[object_edit]['recuent_especific']"
+                        (keyup)="textInformationChangeInput(object_edit,'especific',$event)"
+                        (change)="textInformationChangeInput(object_edit,'especific',$event)" [min]="0" [max]="99"
+                        minMax [maxlength]="2" />
+                    </div>
+                    <mat-radio-button value="range" (click)="textInformationChangeInput(object_edit,'range',$event)">
+                      Definir el recuento mínimo y máximo de
+                      archivos</mat-radio-button>
+                  </mat-radio-group>
+                  <div style="padding-top: 9px; padding-left: 25px">
+                    Mínimo
+                    <!--<mat-label>Clearable input</mat-label>-->
+                    <input class="inputStyleComponent" [disabled]="done[object_edit]['type_recuent_image']!='range'"
+                      matInput pattern="[0-9.]+" knifeOnlyNumbers [(ngModel)]="done[object_edit]['recuent_min_archive']"
+                      (keyup)="textInformationChangeInput(object_edit,'range',$event)"
+                      (change)="textInformationChangeInput(object_edit,'range',$event)" [min]="0" [max]="99" minMax
+                      [maxlength]="2" />
+                  </div>
+                  <div style="
+                      padding-top: 9px;
+                      padding-left: 25px;
+                      margin-bottom: 5px;
+                    ">
+                    Máximo
+                    <!--<mat-label>Clearable input</mat-label>-->
+                    <input class="inputStyleComponent" [disabled]="done[object_edit]['type_recuent_image']!='range'"
+                      matInput pattern="[0-9.]+" knifeOnlyNumbers [(ngModel)]="done[object_edit]['recuent_max_archive']"
+                      (keyup)="textInformationChangeInput(object_edit,'range',$event)"
+                      (change)="textInformationChangeInput(object_edit,'range',$event)" [min]="0" [max]="99" minMax
+                      [maxlength]="2" />
+                  </div>
+                </div>
+
+                <!---------------------End document Component ------------------------------->
+
+                <div *ngIf="done[object_edit]['type']=='input'" style="width: 100%">
+                  <div style="font-weight: 450; padding-bottom: 0px; width: 100%">
+                    Valor predeterminado
+                  </div>
+
+                  <!--<mat-label>Clearable input</mat-label>-->
+                  <input class="inputStyleComponent" matInput type="text" [(ngModel)]="done[object_edit]['text']" />
+                </div>
+                <!--<div *ngIf="done[object_edit]['type']=='radioButton'">-->
+                <div *ngIf="done[object_edit]['type']=='radioButton' || done[object_edit]['type']=='select'">
+                  <!--Options-->
+                  <div style="font-weight: 450; padding-bottom: 0px; width: 100%">
+                    Opciones
+                  </div>
+                  <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="done[object_edit]['options_selec']" cdkDropListGroup
+                    (click)="$event.stopPropagation()">
+                    <div cdkDropList [cdkDropListData]="done[object_edit]['options']" class="example-list"
+                      (cdkDropListDropped)="dropOptions($event)">
+                      <mat-radio-button *ngFor="let option of  done[object_edit]['options'];let i=index"
+                        [value]="option" #button (click)="checkState($event, button);$event.stopPropagation()" cdkDrag>
+                        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                        <input class="inputStyleRadioGroup radio_group_edit" #radio_group_edit
+                          (keyup)="changeFocusAndValueRadioGroup(object_edit,i,$event)"
+                          [value]="done[object_edit]['options'][i]" (click)="$event.stopPropagation()" />
+                        <i (click)="addOption($event,i)" class="icon-options" >
+                          <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M8.8 4H7.2v3.2H4v1.6h3.2V12h1.6V8.8H12V7.2H8.8V4zM8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14.4c-3.52 0-6.4-2.88-6.4-6.4 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.52-2.88 6.4-6.4 6.4z"
+                              fill="#787D8F" fill-rule="evenodd"></path>
+                          </svg>
+                        </i>
+                        <i style="padding-left: 5px" (click)="deleteOption($event,i)" class="icon-options">
+                          <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM1.6 8c0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.52-2.88 6.4-6.4 6.4-3.52 0-6.4-2.88-6.4-6.4zM4 7.2v1.6h8V7.2H4z"
+                              fill="#999" fill-rule="evenodd"></path>
+                          </svg>
+                        </i>
+                        <i style="padding-left: 5px; cursor: move" (click)="$event.preventDefault();
+                            $event.stopPropagation();" cdkDragHandle class="icon-options">
+                          <svg width="16" height="12" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 12h16v-2H0v2zm0-5h16V5H0v2zm0-7v2h16V0H0z" fill="#666" fill-rule="evenodd">
+                            </path>
+                          </svg>
+                        </i>
+                      </mat-radio-button>
+                    </div>
+                  </mat-radio-group>
+                </div>
+                <!--</div>-->
+
+                <div>
+                  <div style="font-size: 17; font-weight: 500; padding-bottom: 9px">
+                    Validación
+                  </div>
+                  <div style="padding-bottom: 9px">
+                    <section class="example-section">
+                      <mat-checkbox class="example-margin" [checked]="done[object_edit]['necessary_question']"
+                        color="primary"
+                        (change)="done[object_edit]['necessary_question']=!done[object_edit]['necessary_question']">Esta
+                        es una pregunta necesaria
+                      </mat-checkbox>
+                    </section>
+                  </div>
+                  <div *ngIf="done[object_edit]['type']=='input' ||
+                  done[object_edit]['type']=='textArea'||
+                  done[object_edit]['type']=='num' " style="padding-bottom: 9px">
+                    <section class="example-section">
+                      <mat-checkbox class="example-margin" [checked]="done[object_edit]['necessary_recuent']"
+                        color="primary"
+                        (change)="done[object_edit]['necessary_recuent']=!done[object_edit]['necessary_recuent']">
+                        Definir el recuento mínimo y máximo de
+                        caracteres</mat-checkbox>
+                    </section>
+                    <div style="padding-top: 9px; padding-left: 25px">
+                      Mínimo
+
+                      <!--<mat-label>Clearable input</mat-label>-->
+                      <input class="inputStyleComponent" [disabled]="!done[object_edit]['necessary_recuent']" matInput
+                        type="number" [(ngModel)]="done[object_edit]['recuent_min']" />
+                    </div>
+                    <div style="padding-top: 9px; padding-left: 25px">
+                      Máximo
+
+                      <!--<mat-label>Clearable input</mat-label>-->
+                      <input class="inputStyleComponent" [disabled]="!done[object_edit]['necessary_recuent']" matInput
+                        type="number" [(ngModel)]="done[object_edit]['recuent_max']" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="state_components == 'aparence' ">Apariencia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttonConfiguration" >
+     <div class="buttonConfigurationOption">Guardar</div>
+     <div class="buttonConfigurationOption" (click)="openDialogConfiguration()">Previsualizar</div>
+      <div class="buttonConfigurationOption">Publicar</div>
+
+    </div>
+    
+  </div>
+
+
+</div>
+
+<!-- Copyright 2022 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at https://angular.io/license -->

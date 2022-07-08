@@ -1,0 +1,46 @@
+.canvas_style {
+    display: none;
+  }
+  ::ng-deep .cdk-dialog-container{
+    border-radius:0px !important;
+    padding: 0px;
+  }
+  .circle_buton {
+    background: #31872e;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  .circle_buton_ckeck {
+    background: #4c8bd5;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  .box_circlebutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .buttonClose{
+    margin-left: 95%;
+    margin-right: 8px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background-color: #a1a3aa;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
